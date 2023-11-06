@@ -1,0 +1,27 @@
+
+ <header class="top-navbar">
+    <div class="logo">
+        <img src="../../assets/my-shifts.jpg" alt="Company Logo">
+    </div>
+    <div class="menu-toggle" (click)="toggleMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    <nav class = "navigation" [ngClass]="{ 'active': isMenuOpen }">
+        <ul>
+            <li *ngIf="!currentUser?.isAdmin"><a [routerLink]="['/home']" *ngIf="!isActive('/home')"><fa-icon [icon]="icon"></fa-icon></a></li>
+            <li *ngIf="currentUser?.isAdmin"><a [routerLink]="['/home-admin']" *ngIf="!isActive('/home-admin')"><fa-icon [icon]="icon"></fa-icon></a></li> 
+            <li><a [routerLink]="['/my-shifts']" *ngIf="!isActive('/my-shifts')">My Shifts</a></li>
+            <li><a [routerLink]="['/add-shift']" *ngIf="!isActive('/add-shift')">Add a Shift</a></li>
+            <li><a [routerLink]="['/edit-profile']" *ngIf="!isActive('/edit-profile')">Edit Profile</a></li>  
+            <li *ngIf="currentUser?.isAdmin"><a [routerLink]="['/all-users']" *ngIf="!isActive('/all-users')">All Users</a></li>
+            <li *ngIf="currentUser?.isAdmin"><a [routerLink]="['/all-shifts']" *ngIf="!isActive('/all-shifts')">All Shifts</a></li>    
+        </ul>
+    </nav>
+    <div class="user-info">
+        <span *ngIf= "currentUser">Hello {{currentUser.firstName}}</span>
+        <a href="" *ngIf= "currentUser" (click)="logout()"><fa-icon [icon]="icon1"></fa-icon></a>
+    </div>
+
+</header>

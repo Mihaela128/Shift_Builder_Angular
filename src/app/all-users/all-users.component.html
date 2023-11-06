@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+    <body>
+    <h3>All users</h3>
+    <table id="users">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Birth Date</th>
+                <th colspan="2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of allUsers">
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.password}}</td>
+                <td>{{user.birthDate}}</td>
+                <td><button (click) ="onEditUser(user.id)"><fa-icon [icon]="icon1"></fa-icon></button></td>
+                <td><button (click)="deleteUser(user.id)"><fa-icon [icon]="icon"></fa-icon></button></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+

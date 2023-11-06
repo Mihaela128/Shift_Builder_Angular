@@ -1,0 +1,99 @@
+<div class="container">
+  <h2>Registration</h2>
+  <form [formGroup]="registrationForm" (ngSubmit)="registerUser()" novalidate>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" />
+      <div *ngIf="registrationForm.get('email')?.hasError('required') && registrationForm.get('email')?.touched" class="error-message">
+        Email is required
+      </div>
+      <div *ngIf="registrationForm.get('email')?.hasError('email') && registrationForm.get('email')?.touched" class="error-message">
+        Please enter a valid email address
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password" />
+      <div *ngIf="registrationForm.get('password')?.hasError('required') && registrationForm.get('password')?.touched" class="error-message">
+        Password is required
+      </div>
+      <div *ngIf="registrationForm.get('password')?.hasError('minlength') && registrationForm.get('password')?.touched" class="error-message">
+        Password must be at least 6 characters long
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" formControlName="confirmPassword" />
+      <div *ngIf="registrationForm.get('confirmPassword')?.hasError('required') && registrationForm.get('confirmPassword')?.touched" class="error-message">
+        Confirm Password is required
+      </div>
+      <div *ngIf="registrationForm.get('confirmPassword')?.hasError('minlength') && registrationForm.get('confirmPassword')?.touched" class="error-message">
+        Password must be at least 6 characters long
+      </div>
+      <div *ngIf="registrationForm.get('password')?.value !== registrationForm.get('confirmPassword')?.value" class="error-message">
+        Passwords do not match
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" formControlName="firstName" />
+      <div *ngIf="registrationForm.get('firstName')?.hasError('required') && registrationForm.get('firstName')?.touched" class="error-message">
+        First Name is required
+      </div>
+      <div *ngIf="registrationForm.get('firstName')?.hasError('minlength') && registrationForm.get('firstName')?.touched" class="error-message">
+        First Name must be at least 2 characters long
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" formControlName="lastName" />
+      <div *ngIf="registrationForm.get('lastName')?.hasError('required') && registrationForm.get('lastName')?.touched" class="error-message">
+        Last Name is required
+      </div>
+      <div *ngIf="registrationForm.get('lastName')?.hasError('minlength') && registrationForm.get('lastName')?.touched" class="error-message">
+        Last Name must be at least 2 characters long
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" id="username" formControlName="username" />
+      <div *ngIf="registrationForm.get('username')?.hasError('required') && registrationForm.get('username')?.touched" class="error-message">
+        Username is required
+      </div>
+      <div *ngIf="registrationForm.get('username')?.hasError('minlength') && registrationForm.get('username')?.touched" class="error-message">
+        Username must be at least 6 characters long
+      </div>
+      <div *ngIf="registrationForm.get('username')?.hasError('usernameInvalidFormat') && registrationForm.get('username')?.touched" class="error-message">
+        A username must contain letters, numbers, and a character that is neither a letter nor a number.
+      </div>          
+    </div>
+    
+    <div class="form-group">
+      <label for="birthDate">Birth Date:</label>
+      <input type="date" id="birthDate" formControlName="birthDate" />
+      <div *ngIf="registrationForm.get('birthDate')?.hasError('required') && registrationForm.get('birthDate')?.touched" class="error-message">
+        Birth Date is required
+      </div>
+      <div *ngIf="registrationForm.get('birthDate')?.hasError('pattern') && registrationForm.get('birthDate')?.touched" class="error-message">
+        Invalid date format
+      </div>
+      <div *ngIf="registrationForm.get('birthDate')?.hasError('dateOutOfRange') && registrationForm.get('birthDate')?.touched" class="error-message">
+        Invalid birth date. Age must be between 18 and 65
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="registrationForm.invalid">Register</button>
+
+    <p class="login-link">
+      <a [routerLink]="['/login']">Already have an account? Login</a>
+    </p>
+
+  </form>
+  <div *ngIf="registrationError" class="error-message">{{ registrationError }}</div>
+</div>

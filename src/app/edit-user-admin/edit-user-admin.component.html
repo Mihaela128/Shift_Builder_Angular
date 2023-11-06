@@ -1,0 +1,72 @@
+<app-navbar></app-navbar>
+<div>
+    <div class="container">
+        <h2>Edit User</h2>
+
+        <form [formGroup]="editUserForm" (ngSubmit)="updateUser()" novalidate>
+
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" formControlName="firstName">
+                <div *ngIf="editUserForm.get('firstName')?.hasError('required') && editUserForm.get('firstName')?.touched" class="error-message">
+                    First Name is required.
+                </div>
+                <div *ngIf="editUserForm.get('firstName')?.hasError('minlength') && editUserForm.get('firstName')?.touched" class="error-message">
+                    First Name must be at least 2 characters long
+                  </div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" formControlName="lastName">
+                <div *ngIf="editUserForm.get('lastName')?.hasError('required') && editUserForm.get('lastName')?.touched" class="error-message">
+                    Last Name is required.
+                </div>
+                <div *ngIf="editUserForm.get('lastName')?.hasError('minlength') && editUserForm.get('lastName')?.touched" class="error-message">
+                    Last Name must be at least 2 characters long
+                  </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" formControlName="email">
+                <div *ngIf="editUserForm.get('email')?.hasError('required') && editUserForm.get('email')?.touched" class="error-message">
+                    Email is required.
+                </div>
+                <div *ngIf="editUserForm.get('email')?.hasError('email') && editUserForm.get('email')?.touched" class="error-message">
+                    Please enter a valid email address.
+                  </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" formControlName="password">
+                <div *ngIf="editUserForm.get('password')?.hasError('required') && editUserForm.get('password')?.touched" class="error-message">
+                    Password is required.
+                </div>
+                <div *ngIf="editUserForm.get('password')?.hasError('minlength') && editUserForm.get('password')?.touched" class="error-message">
+                    Password must be at least 6 characters long.
+                  </div>
+            </div>
+
+            <div class="form-group">
+                <label for="birthDate">Birth Date:</label>
+                <input type="date" id="birthDate" formControlName="birthDate">
+                <div *ngIf="editUserForm.get('birthDate')?.hasError('required') && editUserForm.get('birthDate')?.touched" class="error-message">
+                    Birth date is required.
+                </div>
+                <div *ngIf="editUserForm.get('birthDate')?.hasError('pattern') && editUserForm.get('birthDate')?.touched" class="error-message">
+                    Invalid date format
+                  </div>
+                  <div *ngIf="editUserForm.get('birthDate')?.hasError('dateOutOfRange') && editUserForm.get('birthDate')?.touched" class="error-message">
+                    Invalid birth date. Age must be between 18 and 65
+                  </div>
+            </div>
+
+            <div class="button-container">
+                <button type="submit" class="save" >Save</button>
+                <button type="button" class="cancel-button" (click)="closeForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

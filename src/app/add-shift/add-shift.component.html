@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h2>Add Shifts</h2>
+  <form [formGroup]="addShiftForm" (ngSubmit)="addShift()" novalidate>
+    <div class="form-group">
+      <label for="dateShift">Date:</label>
+      <input type="date" id="dateShift" formControlName="dateShift" required>
+      <div *ngIf="addShiftForm.get('dateShift')?.hasError('required') && addShiftForm.get('dateShift')?.touched" class="error-message">
+        Date is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="startTime">Start Time:</label>
+      <input type="time" id="startTime" formControlName="startTime" required>
+      <div *ngIf="addShiftForm.get('startTime')?.hasError('required') && addShiftForm.get('startTime')?.touched" class="error-message">
+        Start Time is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="endTime">End Time:</label>
+      <input type="time" id="endTime" formControlName="endTime" required>
+      <div *ngIf="addShiftForm.get('endTime')?.hasError('required') && addShiftForm.get('endTime')?.touched" class="error-message">
+        End Time is required.
+      </div>
+      <div *ngIf="addShiftForm.hasError('endTimeBeforeStartTime')" class="error-message">
+        End Time cannot be earlier than Start Time.
+      </div>
+    </div>    
+    
+
+    <div class="form-group">
+      <label for="hourlyWage">Hourly Wage:</label>
+      <input type="number" id="hourlyWage" formControlName="hourlyWage" required>
+      <div *ngIf="addShiftForm.get('hourlyWage')?.hasError('required') && addShiftForm.get('hourlyWage')?.touched" class="error-message">
+        Hourly Wage is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="workPlace">Workplace:</label>
+      <select id="workplace" formControlName="workPlace" required>
+        <option>Office</option>
+        <option>Home</option>
+        <option>On Site</option>
+      </select>
+      <div *ngIf="addShiftForm.get('workPlace')?.hasError('required') && addShiftForm.get('workPlace')?.touched" class="error-message">
+        Workplace is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="shiftName">Shift Name:</label>
+      <input type="text" id="shiftName" formControlName="shiftName" required>
+      <div *ngIf="addShiftForm.get('shiftName')?.hasError('required') && addShiftForm.get('shiftName')?.touched" class="error-message">
+        Shift Name is required.
+      </div>
+      <div *ngIf="addShiftForm.get('shiftName')?.hasError('nameExists')" class="error-message">
+        Shift name already exists!
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="Comments">Comments:</label>
+      <textarea id="comments" formControlName="Comments"></textarea>
+    </div>
+
+    <div class="button-container">
+      <button type="submit" [disabled]="addShiftForm.invalid">Save</button>
+      <button type="button" class="cancel-button" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>

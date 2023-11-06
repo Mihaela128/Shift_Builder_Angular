@@ -1,0 +1,30 @@
+<div class="container">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="loginUser()" novalidate>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" />
+      <div *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched" class="error-message">
+        Please enter a valid email address
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password" />
+      <div *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched" class="error-message">
+        Password must be at least 6 characters long
+      </div>
+    </div>
+    <div *ngIf="invalidCredentials" class="error-message">
+      Invalid email or password.
+    </div>
+    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    <p class="registration-link">
+      <a [routerLink]="['/registration']">Don't have an account? Register</a>
+    </p>
+    <p class="forgot-password-link">
+      <a [routerLink]="['/forgot-password']" (click)="deleteUserAccount(loginForm.get('email')?.value)">Forgot Password?</a>
+    </p><br>
+    
+  </form>    
+</div>

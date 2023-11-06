@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+html{
+  overflow:hidden;
+}
+
+h2 {
+  background-color: #4286f4;
+  color: #fff;
+  padding: 10px;
+}
+
+h3 {
+  color: #333;
+}
+
+p {
+  font-size: 18px;
+  margin: 10px;
+}
+
+.responsive-image {
+  width:400px;
+  height:400px;
+}
+
+.flex{
+  display:flex;
+  justify-content: center;
+}
+
+.flex p{
+  margin-top:0;
+}
+
+@media (max-width: 605px) {
+  .responsive-image {
+    width:300px;
+    height:300px;
+  }
+
+ 
+}

@@ -1,0 +1,63 @@
+<app-navbar></app-navbar>
+<body>
+  <h3>All shifts</h3>
+  <!-- Search options -->
+  <div class="search-filters">
+    <label for="lastNameFilter">Search by Last Name:</label>
+    <input id="lastNameFilter" placeholder="Enter Last Name">
+    <button (click)="searchByLastName()">Search</button>
+    <br><br>
+
+    <label for="shiftPlaceFilter">Search by Shift Place:</label>
+    <input id="shiftPlaceFilter" placeholder="Enter Shift Place">
+    <button (click)="searchByShiftPlace()">Search</button>
+    <br><br>
+
+    <label for="startDateFilter">Start Date:</label>
+    <input id="startDateFilter" type="date" placeholder="Select Start Date">
+    <label for="endDateFilter">End Date:</label>
+    <input id="endDateFilter" type="date" placeholder="Select End Date">
+    <button (click)="searchByDate()">Search</button>
+</div>
+
+
+    <table id="shifts">
+        <thead>
+            <tr>
+                <th>Last Name</th>
+                <!-- <th>Id Shift</th> -->
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Hourly Wage</th>
+                <th>Shift Place</th>
+                <th>Shift Name</th>
+                <th>Comments</th>
+                <th>Total Profit</th>
+                <th colspan="2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let el of shifts">
+                <tr *ngFor="let shift of el.shifts">
+                    <td>{{el.lastName}}</td>
+                    <!-- <td>{{shift.id}}</td> -->
+                    <td>{{shift.dateShift}}</td>
+                    <td>{{shift.startTime}}</td>
+                    <td>{{shift.endTime}}</td>
+                    <td>{{shift.hourlyWage}}</td>
+                    <td>{{shift.workPlace}}</td>
+                    <td>{{shift.shiftName}}</td>
+                    <td>{{shift.Comments}}</td>
+                    <td>{{calculateTotalProfit(shift)}}</td>
+                    <td>
+                        <button routerLink="/edit-shift-admin/{{shift.id}}">Edit</button>
+                    </td>
+                    <td>
+                        <button (click)="deleteShift(el.id,shift.id)">Delete</button>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</body>

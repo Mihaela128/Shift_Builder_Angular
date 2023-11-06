@@ -1,0 +1,70 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <h2>My Shifts</h2>
+  
+    <!-- Search Options -->
+    <!-- Search by Shift Name -->
+    <div class="row mb-3">
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="shiftPlace">Shift Place</label>
+          <input type="text" id="shiftPlace" class="form-control" placeholder="Enter the shift place">
+        </div>
+        <div>
+          <button (click)="searchByName()" class="search-button">Search By Place</button>
+        </div>
+      </div>
+      
+      <!-- Search by Date -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="startDate">Start Date</label>
+          <input type="date" [(ngModel)]="startDate" id="startDate" class="form-control">
+        </div>
+     
+        <div class="form-group">
+          <label for="endDate">End Date</label>
+          <input type="date" [(ngModel)]="endDate" id="endDate" class="form-control">
+        </div>
+        <div>
+          <button (click)="searchByDate()" class="search-button">Search By Date</button>
+        </div>
+      </div>
+      
+
+    </div>
+  
+    <!-- Shift Table -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Hourly wage</th>
+          <th>Work Place</th>
+          <th>Shift Name</th>
+          <th>Comments</th>
+          <th>Total Profit</th>
+          <th colspan="2">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let shift of shifts">
+          <td>{{shift.dateShift}}</td>
+          <td>{{shift.startTime}}</td>
+          <td>{{shift.endTime}}</td>
+          <td>{{shift.hourlyWage}}</td>
+          <td>{{shift.workPlace}}</td>
+          <td>{{shift.shiftName}}</td>
+          <td>{{shift.Comments}}</td>
+          <td>{{calculateTotalProfit(shift)}}</td>
+          <td><button (click)= "delete(shift)"><fa-icon [icon]="icon"></fa-icon></button></td>
+          <td><button (click)="openEditModal(shift)"><fa-icon [icon]="icon1"></fa-icon></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-edit-shift-modal (shiftModified)="onShiftModified($event)"></app-edit-shift-modal>
+

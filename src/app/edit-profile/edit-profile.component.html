@@ -1,0 +1,99 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <h2>Edit Profile</h2>
+    <form [formGroup]="editProfileForm" (ngSubmit)="updateProfile()" novalidate>
+  
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" />
+        <div *ngIf="editProfileForm.get('email')?.hasError('required') && editProfileForm.get('email')?.touched" class="error-message">
+          Email is required
+        </div>
+        <div *ngIf="editProfileForm.get('email')?.hasError('email') && editProfileForm.get('email')?.touched" class="error-message">
+          Please enter a valid email address
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" formControlName="password" />
+        <div *ngIf="editProfileForm.get('password')?.hasError('required') && editProfileForm.get('password')?.touched" class="error-message">
+          Password is required
+        </div>
+        <div *ngIf="editProfileForm.get('password')?.hasError('minlength') && editProfileForm.get('password')?.touched" class="error-message">
+          Password must be at least 6 characters long
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" formControlName="confirmPassword" />
+        <div *ngIf="editProfileForm.get('confirmPassword')?.hasError('required') && editProfileForm.get('confirmPassword')?.touched" class="error-message">
+          Confirm Password is required
+        </div>
+        <div *ngIf="editProfileForm.get('confirmPassword')?.hasError('minlength') && editProfileForm.get('confirmPassword')?.touched" class="error-message">
+          Password must be at least 6 characters long
+        </div>
+        <div *ngIf="editProfileForm.get('password')?.value !== editProfileForm.get('confirmPassword')?.value" class="error-message">
+          Passwords do not match
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" formControlName="firstName" />
+        <div *ngIf="editProfileForm.get('firstName')?.hasError('required') && editProfileForm.get('firstName')?.touched" class="error-message">
+          First Name is required
+        </div>
+        <div *ngIf="editProfileForm.get('firstName')?.hasError('minlength') && editProfileForm.get('firstName')?.touched" class="error-message">
+          First Name must be at least 2 characters long
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" formControlName="lastName" />
+        <div *ngIf="editProfileForm.get('lastName')?.hasError('required') && editProfileForm.get('lastName')?.touched" class="error-message">
+          Last Name is required
+        </div>
+        <div *ngIf="editProfileForm.get('lastName')?.hasError('minlength') && editProfileForm.get('lastName')?.touched" class="error-message">
+          Last Name must be at least 2 characters long
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" formControlName="username" />
+        <div *ngIf="editProfileForm.get('username')?.hasError('required') && editProfileForm.get('username')?.touched" class="error-message">
+          Username is required
+        </div>
+        <div *ngIf="editProfileForm.get('username')?.hasError('minlength') && editProfileForm.get('username')?.touched" class="error-message">
+          Username must be at least 6 characters long
+        </div>
+        <div *ngIf="editProfileForm.get('username')?.hasError('usernameInvalidFormat') && editProfileForm.get('username')?.touched" class="error-message">
+          A username must contain letters, numbers, and a character that is neither a letter nor a number.
+        </div>          
+      </div>
+      
+      <div class="form-group">
+        <label for="birthDate">Birth Date:</label>
+        <input type="date" id="birthDate" formControlName="birthDate" />
+        <div *ngIf="editProfileForm.get('birthDate')?.hasError('required') && editProfileForm.get('birthDate')?.touched" class="error-message">
+          Birth Date is required
+        </div>
+        <div *ngIf="editProfileForm.get('birthDate')?.hasError('pattern') && editProfileForm.get('birthDate')?.touched" class="error-message">
+          Invalid date format
+        </div>
+        <div *ngIf="editProfileForm.get('birthDate')?.hasError('dateOutOfRange') && editProfileForm.get('birthDate')?.touched" class="error-message">
+          Invalid birth date. Age must be between 18 and 65
+        </div>
+      </div>
+  
+      <div class="button-container">
+        <button type="submit" [disabled]="editProfileForm.invalid">Save</button>
+        <button (click)="cancelEdit()">Cancel</button>
+      </div>
+    </form>
+    <div *ngIf="editProfileError" class="error-message">{{ editProfileError }}</div>
+  </div>
+  
